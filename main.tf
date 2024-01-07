@@ -12,13 +12,11 @@ provider "aws" {
 access_key = var.AWS_ACCESS_KEY
 secret_key = var.AWS_SECRET_KEY
 region = "ap-south-1"
-}
-resource "aws_instance" "myec2" {
-  ami           = ""ami-0a0f1259dd1c90938
+} resource "aws_instance" "myec2" {
+  ami           = "ami-03a6eaae9938c858c"
   instance_type = "t2.micro"
   vpc_security_group_ids=[aws_security_group.web-sg.id]
-  key_name="tf-key-pair" 
-tags={
+  key_name="tf-key-pair"  tags={
  Name="web-server"
 }
 user_data= <<-EOF
@@ -37,8 +35,7 @@ ingress {
  to_port=80
 protocol="tcp"
 cidr_blocks= ["0.0.0.0/0"]
-}  
-ingress {
+}  ingress {
  from_port=22
  to_port=22
 protocol="tcp"
